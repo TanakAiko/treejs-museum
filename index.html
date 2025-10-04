@@ -1,0 +1,54 @@
+<!--
+    Author: Hitarth Singh & Kerim Kochekov
+    Project: Museum Imaginarium
+    Description: Greeting page
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Museum Imaginarium - Loading...</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .loading {
+      text-align: center;
+    }
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #8B4513;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 2s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading">
+    <h2>Museum Imaginarium</h2>
+    <div class="spinner"></div>
+    <p>Loading 3D Art Gallery...</p>
+  </div>
+  
+  <script>
+    // Redirect directly to the 3D scene
+    window.location.href = 'game.html';
+  </script>
+</body>
+</html>
