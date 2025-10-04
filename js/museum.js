@@ -76,6 +76,7 @@ function init() {
     
     animate();
 
+    addMobileNavigation();
 }
 
 function getSpotLight(position, targetObject = null){
@@ -449,6 +450,67 @@ function addTrackballControls(){
     }
     canvas.addEventListener("mousedown", down, false);
     canvas.addEventListener("touchmove", touch, false);   
+}
+
+// Add mobile navigation overlay
+function addMobileNavigation() {
+    console.log("Window size:", window.innerWidth);
+
+    // Only show on small screens
+    // if (window.innerWidth > 900) return;
+    console.log("------------------------------> Adding mobile navigation");
+
+    var nav_move = document.createElement('div');
+    nav_move.id = 'mobileNavMove';
+    nav_move.style.cssText = `
+        position: fixed; bottom: 120px; left: 20%; transform: translateX(-50%);
+        z-index: 9999; display: flex; gap: 60px;
+    `;
+
+    var nav_rotation = document.createElement('div');
+    nav_rotation.id = 'mobileNavRotation';
+    nav_rotation.style.cssText = `
+        position: fixed; bottom: 200px; left: 70%; transform: translateX(-50%);
+        z-index: 9999; display: flex; gap: 60px;
+    `;
+
+    // Helper to create a button
+    function navBtn(label, onTouchStart, onTouchEnd) {
+        var btn = document.createElement('button');
+        btn.textContent = label;
+        btn.style.cssText = `
+            width: 150px;
+            height: 150px;
+            font-size: 100px;
+            padding: 10px 20px;
+            border-radius: 50%;
+            background:rgb(0, 0, 0);
+            color: white;
+            border: solid;
+            box-shadow: 0 2px 6px #0003;
+        `;
+        btn.ontouchstart = function(e) { e.preventDefault(); onTouchStart(); };
+        btn.ontouchend = function(e) { e.preventDefault(); if (onTouchEnd) onTouchEnd(); };
+        return btn;
+    }
+
+    // Left column for move buttons
+    var moveCol = document.createElement('div');
+    moveCol.style.cssText = 'display: flex; flex-direction: column; gap: 50px;';
+    moveCol.appendChild(navBtn('↑', () => player.move_forward(true, 0.8), () => player.move_forward(false)));
+    moveCol.appendChild(navBtn('↓', () => player.move_forward(true, -0.8), () => player.move_forward(false)));
+
+    // Right column for rotate buttons
+    var rotateCol = document.createElement('div');
+    rotateCol.style.cssText = 'display: flex; flex-direction: line; gap: 50px;';
+    rotateCol.appendChild(navBtn('←', () => player.rotate_y(true, 0.3), () => player.rotate_y(false)));
+    rotateCol.appendChild(navBtn('→', () => player.rotate_y(true, -0.3), () => player.rotate_y(false)));
+
+    nav_move.appendChild(moveCol);
+    nav_rotation.appendChild(rotateCol);
+
+    document.body.appendChild(nav_move);
+    document.body.appendChild(nav_rotation);
 }
 
 
