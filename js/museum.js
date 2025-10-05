@@ -117,95 +117,6 @@ var images;
 /**
  * Function to create and display local art images in an HTML table
  */
-function createImageTable() {
-    // Remove existing table if it exists
-    var existingTable = document.getElementById('imageTable');
-    if (existingTable) {
-        existingTable.remove();
-    }
-    
-    // Create table element
-    var table = document.createElement('table');
-    table.id = 'imageTable';
-    table.style.cssText = `
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        background: rgba(255, 255, 255, 0.9);
-        border: 2px solid #8B4513;
-        border-radius: 10px;
-        padding: 10px;
-        z-index: 1000;
-        max-width: 320px;
-        font-family: Arial, sans-serif;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    `;
-    
-    // Create table header
-    var headerRow = document.createElement('tr');
-    var headerCell = document.createElement('th');
-    headerCell.textContent = 'Art Gallery Images';
-    headerCell.style.cssText = 'text-align: center; padding: 10px; background: #8B4513; color: white; border-radius: 5px;';
-    headerCell.colSpan = 2;
-    headerRow.appendChild(headerCell);
-    table.appendChild(headerRow);
-    
-    // Create table rows for each image
-    for (var i = 0; i < images.length; i++) {
-        var row = document.createElement('tr');
-        row.style.cssText = 'border-bottom: 1px solid #ddd;';
-        
-        // Image cell
-        var imageCell = document.createElement('td');
-        imageCell.style.cssText = 'padding: 5px; text-align: center;';
-        
-        var img = document.createElement('img');
-        img.src = images[i].url;
-        img.style.cssText = `
-            width: 80px;
-            height: 60px;
-            object-fit: cover;
-            border: 2px solid #8B4513;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.2s;
-        `;
-        
-        // Add click event to view larger image
-        img.onclick = function(url) {
-            return function() {
-                window.open(url, '_blank');
-            };
-        }(images[i].url);
-        
-        // Add hover effect
-        img.onmouseover = function() {
-            this.style.transform = 'scale(1.1)';
-        };
-        img.onmouseout = function() {
-            this.style.transform = 'scale(1.0)';
-        };
-        
-        imageCell.appendChild(img);
-        
-        // Info cell
-        var infoCell = document.createElement('td');
-        infoCell.style.cssText = 'padding: 5px; font-size: 12px; vertical-align: top;';
-        var fileName = images[i].url.split('/').pop(); // Extract filename
-        infoCell.innerHTML = `
-            <strong>Art ${i + 1}</strong><br>
-            <small>${fileName}</small><br>
-            <a href="${images[i].url}" target="_blank" style="color: #8B4513;">View Full Size</a>
-        `;
-        
-        row.appendChild(imageCell);
-        row.appendChild(infoCell);
-        table.appendChild(row);
-    }
-    
-    // Add table to the page
-    document.body.appendChild(table);
-}
 
 /**
  * Function to create the scene. It is called just once to make the scene.
@@ -214,12 +125,12 @@ function createScene(){
     const loader = new THREE.TextureLoader();
     const background_loader = new THREE.CubeTextureLoader();
     const texture = background_loader.load([
-        './assets/skybox/skybox_right.png',   // posx
-        './assets/skybox/skybox_left.png',    // negx
-        './assets/skybox/skybox_top.png',     // posy
-        './assets/skybox/skybox_bottom.png',  // negy
-        './assets/skybox/skybox_front.png',   // posz
-        './assets/skybox/skybox_back.png'     // negz
+        './assets/football/posx.jpg',
+        './assets/football/negx.jpg',
+        './assets/football/posy.jpg',
+        './assets/football/negy.jpg',
+        './assets/football/posz.jpg',
+        './assets/football/negz.jpg',
     ]);
 
     scene.background = texture;
@@ -280,7 +191,6 @@ function createScene(){
     }
     
     // Create and display the images in a table
-    // createImageTable();
 
     photoframes = { 
         Frame0:{

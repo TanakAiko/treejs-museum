@@ -57,7 +57,7 @@ class Room {
         var wall_material = new THREE.MeshBasicMaterial( {map: loader.load('assets/wall-texture.jpeg'), side: THREE.DoubleSide} );
         var floor_material = new THREE.MeshBasicMaterial( {map: loader.load('assets/floor-texture.jpeg'), side: THREE.DoubleSide} );
         var ceiling_material = new THREE.MeshBasicMaterial( {map: loader.load('assets/ceiling-texture.jpeg'), side: THREE.DoubleSide} );
-        var grass_material = new THREE.MeshBasicMaterial( {map: loader.load('assets/Ground091_2K-JPG_Roughness.jpg', function ( texture ) {
+        var grass_material = new THREE.MeshBasicMaterial( {map: loader.load('assets/grass-texture.jpeg', function ( texture ) {
             texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
             texture.offset.set(0, 0);
             texture.repeat.set(20, 20)}), side: THREE.DoubleSide} 
@@ -151,11 +151,11 @@ class Room {
                 "position": [5, -8, 60],
                 "rotation": [Math.PI/2, -Math.PI, Math.PI/2]
             },
-            "Neptune": {
-                "scale": 1,
-                "path": './objects/neptune/scene.gltf',
-                "position": [25, -10, 9],
-                "rotation": [-Math.PI/2, 0, Math.PI/2]
+            "Osiris": {
+                "scale": 0.01,
+                "path": './objects/osiris/scene.gltf',
+                "position": [25, -1, 9],
+                "rotation": [-Math.PI/2, -0.25, -Math.PI/2]
             },
             "Bench": {
                 "scale": 0.08,
