@@ -145,12 +145,6 @@ class Room {
             this.object.add(wall_object.object);
         }
         this.decorations = {
-            "Philopoemen": {
-                "scale": 0.04,
-                "path": './objects/philopoemen/scene.gltf',
-                "position": [5, -8, 60],
-                "rotation": [Math.PI/2, -Math.PI, Math.PI/2]
-            },
             "Osiris": {
                 "scale": 0.01,
                 "path": './objects/osiris/scene.gltf',
