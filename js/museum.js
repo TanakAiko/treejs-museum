@@ -57,19 +57,19 @@ function init() {
         document.getElementById("error").innerHTML = "<h1>Sorry, the browser doesn't support WebGL. Please try with a newer and better browser!";
         return;
     }
-
+    
     points = [];
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     renderer.setSize( window.innerWidth, window.innerHeight );
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    
+    addTrackballControls();
     createScene();
     
     raycaster = new THREE.Raycaster();
     pointer = new THREE.Vector2();
-
-    addTrackballControls();
 
     var ambient = new THREE.AmbientLight(0x444444)
     scene.add(ambient);
@@ -280,7 +280,7 @@ function createScene(){
     }
     
     // Create and display the images in a table
-    createImageTable();
+    // createImageTable();
 
     photoframes = { 
         Frame0:{
@@ -431,6 +431,7 @@ function render(){
 //Function to add trackball controls to move with Mouse
 function addTrackballControls(){
     controls = new THREE.TrackballControls(camera, canvas);
+    controls.noRotate = true;
     controls.noZoom = false;
     controls.noPan = controls.staticMoving = true;
     function move() {
@@ -457,21 +458,30 @@ function addMobileNavigation() {
     console.log("Window size:", window.innerWidth);
 
     // Only show on small screens
-    // if (window.innerWidth > 900) return;
+    if (window.innerWidth > 900) return;
     console.log("------------------------------> Adding mobile navigation");
+    
+    let size = 100;
+    let fontSize = 60;
+    let gap = 40;
+    if (window.innerWidth < 450) {
+        size = 75;
+        fontSize = 40;
+        gap = 30;
+    }
 
     var nav_move = document.createElement('div');
     nav_move.id = 'mobileNavMove';
     nav_move.style.cssText = `
-        position: fixed; bottom: 120px; left: 20%; transform: translateX(-50%);
-        z-index: 9999; display: flex; gap: 60px;
+        position: fixed; bottom: 95px; left: 20%; transform: translateX(-50%);
+        z-index: 9999; display: flex; gap: ${gap}px; opacity: 0.6;
     `;
 
     var nav_rotation = document.createElement('div');
     nav_rotation.id = 'mobileNavRotation';
     nav_rotation.style.cssText = `
-        position: fixed; bottom: 200px; left: 70%; transform: translateX(-50%);
-        z-index: 9999; display: flex; gap: 60px;
+        position: fixed; bottom: 150px; left: 73%; transform: translateX(-50%);
+        z-index: 9999; display: flex; gap: ${gap}px; opacity: 0.6;
     `;
 
     // Helper to create a button
@@ -479,9 +489,9 @@ function addMobileNavigation() {
         var btn = document.createElement('button');
         btn.textContent = label;
         btn.style.cssText = `
-            width: 150px;
-            height: 150px;
-            font-size: 100px;
+            width: ${size}px;
+            height: ${size}px;
+            font-size: ${fontSize}px;
             padding: 10px 20px;
             border-radius: 50%;
             background:rgb(0, 0, 0);
@@ -496,13 +506,13 @@ function addMobileNavigation() {
 
     // Left column for move buttons
     var moveCol = document.createElement('div');
-    moveCol.style.cssText = 'display: flex; flex-direction: column; gap: 50px;';
+    moveCol.style.cssText = 'display: flex; flex-direction: column; gap: 20px;';
     moveCol.appendChild(navBtn('↑', () => player.move_forward(true, 0.8), () => player.move_forward(false)));
     moveCol.appendChild(navBtn('↓', () => player.move_forward(true, -0.8), () => player.move_forward(false)));
 
     // Right column for rotate buttons
     var rotateCol = document.createElement('div');
-    rotateCol.style.cssText = 'display: flex; flex-direction: line; gap: 50px;';
+    rotateCol.style.cssText = 'display: flex; flex-direction: line; gap: 10%;';
     rotateCol.appendChild(navBtn('←', () => player.rotate_y(true, 0.3), () => player.rotate_y(false)));
     rotateCol.appendChild(navBtn('→', () => player.rotate_y(true, -0.3), () => player.rotate_y(false)));
 
