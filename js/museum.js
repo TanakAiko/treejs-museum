@@ -174,10 +174,10 @@ function createScene(){
     
     // Define the local art images
     var artImages = [
-        "assets/art/10.png",
-        "assets/art/9.png",
-        "assets/art/8.png",
-        "assets/art/7.png",
+        "assets/art/10.jpg",
+        "assets/art/9.jpg",
+        "assets/art/8.jpg",
+        "assets/art/7.jpg",
         "assets/art/6.jpg"
     ];
     
